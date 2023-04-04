@@ -1,29 +1,23 @@
 package com.uygulamalarim.foodrecipeapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.uygulamalarim.foodrecipeapp.Fragments.HomeFragment;
-import com.uygulamalarim.foodrecipeapp.Model.MainModel;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import kotlinx.coroutines.GlobalScope;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import com.uygulamalarim.foodrecipeapp.Fragments.ProfileFragment;
+import com.uygulamalarim.foodrecipeapp.Fragments.SavedFragment;
+import com.uygulamalarim.foodrecipeapp.Fragments.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<MainModel> list=new ArrayList<MainModel>();
+    BottomNavigationView bottomnavbar;
 
     private static final String API_KEY = "OJSordFi1bhz2vKkKY4gFUtIBvqWlIrf";
     private static final String BASE_URL = "https://api.apilayer.com/spoonacular/recipes/complexSearch";
@@ -32,11 +26,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        bottomnavbar=findViewById(R.id.bottomNavbar);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainer, new HomeFragment())
                 .commit();
 
+        bottomnavbar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        changeFragment(new HomeFragment());
+                        break;
+
+                    case R.id.search:
+                        changeFragment(new SearchFragment());
+                        break;
+                    case R.id.saved:
+                        changeFragment(new SavedFragment());
+                        break;
+                    case R.id.profilepage:
+                        changeFragment(new ProfileFragment());
+                        break;
+                }
+                return true;
+            }
+
+
+        });
+
+    }
+    public void changeFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
     }
 
 

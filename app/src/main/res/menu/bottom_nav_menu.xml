@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/home"
+        android:title="Home"
+        app:showAsAction="ifRoom"
+        app:itemIconTint="@color/pickedColor"
+        android:icon="@drawable/home_unfocused"/>
+    <item android:id="@+id/search"
+        app:showAsAction="ifRoom"
+        app:itemIconTint="@color/pickedColor"
+        android:title="Search"
+        android:icon="@drawable/search_unfocused"/>
+    <item android:id="@+id/saved"
+        app:showAsAction="ifRoom"
+        app:itemIconTint="@color/pickedColor"
+        android:title="Saved"
+        android:icon="@drawable/bookmark_unfocused"/>
+    <item android:id="@+id/profilepage"
+        app:showAsAction="ifRoom"
+        app:itemIconTint="@color/pickedColor"
+        android:title="Home"
+        android:icon="@drawable/profile_unfocused"/>
+</menu>
