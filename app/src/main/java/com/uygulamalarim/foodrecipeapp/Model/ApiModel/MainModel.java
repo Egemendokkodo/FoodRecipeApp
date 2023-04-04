@@ -1,7 +1,6 @@
 
-package com.uygulamalarim.foodrecipeapp.Model;
+package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
 
-import java.io.IOException;
 import java.util.List;
 
 public class MainModel {

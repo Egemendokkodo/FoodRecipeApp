@@ -1,11 +1,10 @@
-package com.uygulamalarim.foodrecipeapp.Model;
+package com.uygulamalarim.foodrecipeapp.Model.RandomApiModel;
 
 public class Ent {
     private String image;
     private String localizedName;
     private String name;
     private long id;
-    private Length temperature;
 
     public String getImage() {
         return image;
@@ -37,13 +36,5 @@ public class Ent {
 
     public void setid(long value) {
         this.id = value;
-    }
-
-    public Length getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Length value) {
-        this.temperature = value;
     }
 }

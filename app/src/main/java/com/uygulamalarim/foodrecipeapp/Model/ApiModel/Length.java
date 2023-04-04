@@ -1,4 +1,4 @@
-package com.uygulamalarim.foodrecipeapp.Model;
+package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
 
 public class Length {
     private long number;

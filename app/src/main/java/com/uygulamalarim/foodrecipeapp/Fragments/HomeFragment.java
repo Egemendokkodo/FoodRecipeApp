@@ -8,21 +8,38 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.uygulamalarim.foodrecipeapp.Adapter.CategoryAdapter;
+import com.uygulamalarim.foodrecipeapp.Adapter.RandomAdapter;
+
 import com.uygulamalarim.foodrecipeapp.Model.CategoryModel.CategoryDomain;
+import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.R;
+import com.uygulamalarim.foodrecipeapp.Retrofit.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewCategory;
     private RecyclerView.Adapter adapter;
+
+    private RecyclerView recyclerViewRandom;
+    private RandomAdapter randomAdapter;
+    private List<RandomApiMain> randomRecipeList = new ArrayList<RandomApiMain>();
 
 
     @Override
@@ -42,6 +59,56 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerViewCategory(view);
+
+        recyclerViewRandom = view.findViewById(R.id.recommendationRecycler);
+        randomAdapter = new RandomAdapter(randomRecipeList);
+        recyclerViewRandom.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewRandom.setAdapter(randomAdapter);
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.spoonacular.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface service = retrofit.create(ApiInterface.class);
+        Call<RandomApiMain> call = service.getRandomRecipes(
+                "deca8906aed24d22b6d91e8ae1b61b6d",
+                "main dish",
+                5
+        );
+
+        call.enqueue(new Callback<RandomApiMain>() {
+                @Override
+                public void onResponse(Call<RandomApiMain> call, Response<RandomApiMain> response) {
+                    if (response.isSuccessful()) {
+                        RandomApiMain randomApiMain = response.body();
+                        randomRecipeList.clear();
+                        for (int i = 0; i < 5; i++) {
+                        randomRecipeList.add(randomApiMain);
+                        }
+
+
+                        randomAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RandomApiMain> call, Throwable t) {
+                    Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
 
     }
     private void recyclerViewCategory(View view) {
