@@ -76,11 +76,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
@@ -154,7 +155,7 @@
                 android:id="@+id/flexboxLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:contextClickable="false"
                 android:orientation="horizontal"
                 app:justifyContent="space_between"
@@ -170,7 +171,6 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/cheap_false"
                     android:gravity="center"
-                    android:text=" Cheap"
                     android:textColor="#FF0000"
                     android:textSize="15sp" />
 
@@ -182,7 +182,6 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/gluten_free_false"
                     android:gravity="center"
-                    android:text="  Gluten-Free"
                     android:textColor="#FF0000"
                     android:textSize="14sp"
                     tools:layout_editor_absoluteX="100dp" />
@@ -195,7 +194,6 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/vegetarian_false"
                     android:gravity="center"
-                    android:text="  Vegetarian"
                     android:textColor="#FF0000"
                     android:textSize="14sp"
                     tools:layout_editor_absoluteX="201dp" />
@@ -207,17 +205,85 @@
                     android:layout_weight="1"
                     android:drawableStart="@drawable/vegan_false"
                     android:gravity="center"
-                    android:text="   Vegan"
                     android:textColor="#FF0000"
                     android:textSize="14sp"
                     tools:layout_editor_absoluteX="302dp" />
 
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexboxLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contextClickable="false"
+                android:orientation="horizontal"
+                app:justifyContent="space_between"
+                app:layout_constraintEnd_toEndOf="@+id/flexboxLayout2"
+                app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
+
+                <TextView
+                    android:id="@+id/isCheaptext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Cheap"
+                    android:textColor="#FF0000"
+                    android:textSize="15sp"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="10dp" />
+
+
+                <TextView
+                    android:id="@+id/isGlutenFreetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+
+                    android:gravity="center"
+                    android:text="Gluten-Free"
+                    android:textColor="#FF0000"
+                    android:textSize="14sp"
+                    tools:layout_editor_absoluteX="100dp"
+                    tools:layout_editor_absoluteY="10dp" />
+
+                <TextView
+                    android:id="@+id/isVegetariantext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Vegetarian"
+                    android:textColor="#FF0000"
+                    android:textSize="14sp"
+                    tools:layout_editor_absoluteX="201dp"
+                    tools:layout_editor_absoluteY="10dp" />
+
+                <TextView
+                    android:id="@+id/isVegantext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Vegan"
+                    android:textColor="#FF0000"
+                    android:textSize="14sp"
+                    tools:layout_editor_absoluteX="302dp"
+                    tools:layout_editor_absoluteY="10dp" />
+
+
             </com.google.android.flexbox.FlexboxLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
