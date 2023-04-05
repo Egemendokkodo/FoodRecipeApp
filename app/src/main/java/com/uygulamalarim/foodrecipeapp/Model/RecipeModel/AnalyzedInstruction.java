@@ -1,16 +1,16 @@
-package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
+package com.uygulamalarim.foodrecipeapp.Model.RecipeModel;
 
 import java.util.List;
 
 public class AnalyzedInstruction {
-    private Name name;
+    private String name;
     private List<Step> steps;
 
-    public Name getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Name value) {
+    public void setName(String value) {
         this.name = value;
     }
 

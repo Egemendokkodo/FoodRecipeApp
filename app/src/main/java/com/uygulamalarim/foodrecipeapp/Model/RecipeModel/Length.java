@@ -1,8 +1,8 @@
-package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
+package com.uygulamalarim.foodrecipeapp.Model.RecipeModel;
 
 public class Length {
     private long number;
-    private Unit unit;
+    private String unit;
 
     public long getNumber() {
         return number;
@@ -12,11 +12,11 @@ public class Length {
         this.number = value;
     }
 
-    public Unit getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit value) {
+    public void setUnit(String value) {
         this.unit = value;
     }
 }

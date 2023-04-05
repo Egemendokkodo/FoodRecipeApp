@@ -1,4 +1,4 @@
-package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
+package com.uygulamalarim.foodrecipeapp.Model.RecipeModel;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Result {
     private boolean vegetarian;
     private long id;
     private long preparationMinutes;
-    private ImageType imageType;
+    private String imageType;
     private String summary;
     private long cookingMinutes;
     private String image;
@@ -27,16 +27,15 @@ public class Result {
     private boolean vegan;
     private boolean cheap;
     private List<String> dishTypes;
-    private Gaps gaps;
+    private String gaps;
     private List<String> cuisines;
     private boolean lowFodmap;
-    private String license;
+    private Nutrition nutrition;
     private long weightWatcherSmartPoints;
     private List<Object> occasions;
     private double pricePerServing;
     private String sourceName;
     private String spoonacularSourceUrl;
-    private String author;
 
     public boolean getSustainable() {
         return sustainable;
@@ -166,11 +165,11 @@ public class Result {
         this.preparationMinutes = value;
     }
 
-    public ImageType getImageType() {
+    public String getImageType() {
         return imageType;
     }
 
-    public void setImageType(ImageType value) {
+    public void setImageType(String value) {
         this.imageType = value;
     }
 
@@ -230,11 +229,11 @@ public class Result {
         this.dishTypes = value;
     }
 
-    public Gaps getGaps() {
+    public String getGaps() {
         return gaps;
     }
 
-    public void setGaps(Gaps value) {
+    public void setGaps(String value) {
         this.gaps = value;
     }
 
@@ -254,12 +253,12 @@ public class Result {
         this.lowFodmap = value;
     }
 
-    public String getLicense() {
-        return license;
+    public Nutrition getNutrition() {
+        return nutrition;
     }
 
-    public void setLicense(String value) {
-        this.license = value;
+    public void setNutrition(Nutrition value) {
+        this.nutrition = value;
     }
 
     public long getWeightWatcherSmartPoints() {
@@ -300,13 +299,5 @@ public class Result {
 
     public void setSpoonacularSourceUrl(String value) {
         this.spoonacularSourceUrl = value;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String value) {
-        this.author = value;
     }
 }

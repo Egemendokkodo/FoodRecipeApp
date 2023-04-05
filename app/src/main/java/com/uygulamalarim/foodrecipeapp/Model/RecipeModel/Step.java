@@ -1,13 +1,13 @@
-package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
+package com.uygulamalarim.foodrecipeapp.Model.RecipeModel;
 
 import java.util.List;
 
 public class Step {
     private long number;
+    private Length length;
     private List<Ent> ingredients;
     private List<Ent> equipment;
     private String step;
-    private Length length;
 
     public long getNumber() {
         return number;
@@ -15,6 +15,14 @@ public class Step {
 
     public void setNumber(long value) {
         this.number = value;
+    }
+
+    public Length getLength() {
+        return length;
+    }
+
+    public void setLength(Length value) {
+        this.length = value;
     }
 
     public List<Ent> getIngredients() {
@@ -39,13 +47,5 @@ public class Step {
 
     public void setStep(String value) {
         this.step = value;
-    }
-
-    public Length getLength() {
-        return length;
-    }
-
-    public void setLength(Length value) {
-        this.length = value;
     }
 }

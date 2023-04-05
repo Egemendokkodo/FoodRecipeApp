@@ -1,5 +1,6 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler {
     private RecyclerView recyclerViewCategory;
     private RecyclerView.Adapter adapter;
 
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
         recyclerViewCategory(view);
 
         recyclerViewRandom = view.findViewById(R.id.recommendationRecycler);
-        randomAdapter = new RandomAdapter(randomRecipeList);
+        randomAdapter = new RandomAdapter(randomRecipeList,this);
         recyclerViewRandom.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerViewRandom.setAdapter(randomAdapter);
 
@@ -112,7 +113,6 @@ public class HomeFragment extends Fragment {
 
     }
     private void recyclerViewCategory(View view) {
-        // this is categorylist in the main page
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewCategory=view.findViewById(R.id.categoriesRecycler);
         recyclerViewCategory.setLayoutManager(linearLayoutManager);
@@ -126,6 +126,17 @@ public class HomeFragment extends Fragment {
         category.add(new CategoryDomain("Appetiser","pic5"));
         adapter=new CategoryAdapter(category);
         recyclerViewCategory.setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onClickRecycler(int position) {
+        String food_name=randomRecipeList.get(position).getRecipes().get(position).getTitle();
+        //Toast.makeText(getContext(), randomRecipeList.get(position).getRecipes().get(position).getTitle(), Toast.LENGTH_SHORT).show();
+        Intent i=new Intent(getContext(),DetailedPage.class);
+        i.putExtra("FOOD_NAME",food_name);
+        startActivity(i);
+
     }
 
 

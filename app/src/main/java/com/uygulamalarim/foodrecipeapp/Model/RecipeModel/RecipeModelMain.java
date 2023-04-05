@@ -1,9 +1,12 @@
+// RecipeModelMain.java
 
-package com.uygulamalarim.foodrecipeapp.Model.ApiModel;
+//YApi QuickType插件生成，具体参考文档:https://github.com/RmondJone/YapiQuickType
+
+package com.uygulamalarim.foodrecipeapp.Model.RecipeModel;
 
 import java.util.List;
 
-public class MainModel {
+public class RecipeModelMain {
     private long number;
     private long totalResults;
     private long offset;
@@ -21,6 +24,5 @@ public class MainModel {
     public List<Result> getResults() { return results; }
     public void setResults(List<Result> value) { this.results = value; }
 }
-
 
 
