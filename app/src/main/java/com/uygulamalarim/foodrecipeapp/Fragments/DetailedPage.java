@@ -73,7 +73,7 @@ public class DetailedPage extends AppCompatActivity {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RecipeModelMain> call = service.getFullRecipe(
-                "54dff7b37e4a49ac8585d04bb5e3ddaa",
+                "257f8904a2aa42dcad6a8d48f6a4d89b",
                 food_name,
                 true,
                 true

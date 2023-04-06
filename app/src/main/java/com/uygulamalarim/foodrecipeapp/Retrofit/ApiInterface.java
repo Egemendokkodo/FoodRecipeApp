@@ -1,5 +1,6 @@
 package com.uygulamalarim.foodrecipeapp.Retrofit;
 
+import com.uygulamalarim.foodrecipeapp.Model.CategoryRecyclerModel.CategoryRecyclerModel;
 import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.RecipeModel.RecipeModelMain;
 
@@ -12,4 +13,6 @@ public interface ApiInterface {
     Call<RandomApiMain> getRandomRecipes(@Query("apiKey") String apiKey, @Query("tags") String tags, @Query("number") int number);
     @GET("recipes/complexSearch")
     Call<RecipeModelMain> getFullRecipe(@Query("apiKey") String apiKey, @Query("query") String query, @Query("addRecipeInformation") Boolean addRecipeInformation,@Query("addRecipeNutrition") Boolean addRecipeNutrition);
+    @GET("recipes/complexSearch")
+    Call<CategoryRecyclerModel> getFoodsByCategoryName(@Query("apiKey") String apiKey, @Query("type") String type, @Query("number") int number);
 }

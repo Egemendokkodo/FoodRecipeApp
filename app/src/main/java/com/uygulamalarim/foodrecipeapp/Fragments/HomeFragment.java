@@ -34,13 +34,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler {
+public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler,CategoryAdapter.CategorySelectListener {
     private RecyclerView recyclerViewCategory;
     private RecyclerView.Adapter adapter;
 
     private RecyclerView recyclerViewRandom;
     private RandomAdapter randomAdapter;
     private List<RandomApiMain> randomRecipeList = new ArrayList<RandomApiMain>();
+
+    ArrayList<CategoryDomain> category=new ArrayList<>();
 
 
     @Override
@@ -74,7 +76,7 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RandomApiMain> call = service.getRandomRecipes(
-                "54dff7b37e4a49ac8585d04bb5e3ddaa",
+                "257f8904a2aa42dcad6a8d48f6a4d89b",
                 "main dish",
                 5
         );
@@ -118,13 +120,13 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         recyclerViewCategory.setLayoutManager(linearLayoutManager);
 
 
-        ArrayList<CategoryDomain> category=new ArrayList<>();
-        category.add(new CategoryDomain("Main Dishes","pic1"));
-        category.add(new CategoryDomain("Salads","pic2"));
-        category.add(new CategoryDomain("Desserts","pic3"));
-        category.add(new CategoryDomain("Drinks","pic4"));
-        category.add(new CategoryDomain("Appetiser","pic5"));
-        adapter=new CategoryAdapter(category);
+
+        category.add(new CategoryDomain("Main Course","pic1"));
+        category.add(new CategoryDomain("Salad","pic2"));
+        category.add(new CategoryDomain("Dessert","pic3"));
+        category.add(new CategoryDomain("Drink","pic4"));
+        category.add(new CategoryDomain("Appetizer","pic5"));
+        adapter=new CategoryAdapter(category,this);
         recyclerViewCategory.setAdapter(adapter);
     }
 
@@ -135,6 +137,14 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         //Toast.makeText(getContext(), randomRecipeList.get(position).getRecipes().get(position).getTitle(), Toast.LENGTH_SHORT).show();
         Intent i=new Intent(getContext(),DetailedPage.class);
         i.putExtra("FOOD_NAME",food_name);
+        startActivity(i);
+
+    }
+    @Override
+    public void onItemClicked(int position) {
+        String food_category=category.get(position).getTitle();
+        Intent i=new Intent(getContext(),CategoryPage.class);
+        i.putExtra("CATEGORY_NAME",food_category);
         startActivity(i);
 
     }
