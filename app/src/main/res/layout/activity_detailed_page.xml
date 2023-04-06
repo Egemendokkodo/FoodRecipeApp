@@ -17,7 +17,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="250sp"
-            
+
             app:contentScrim="@color/pickedColor"
             app:expandedTitleMarginStart="16sp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlwaysCollapsed">
@@ -32,478 +32,311 @@
                 app:layout_collapseParallaxMultiplier="0.7"
                 app:riv_corner_radius_bottom_left="20sp"
                 app:riv_corner_radius_bottom_right="20sp" />
+
             <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                app:title="@string/app_name"
-                android:layout_height="?attr/actionBarSize"
                 android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:titleTextColor="@color/white"/>
+                app:title="@string/app_name"
+                app:titleTextColor="@color/white" />
+
             <ImageButton
                 android:id="@+id/backbtn"
-                android:layout_margin="10dp"
-                android:layout_gravity="start"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
                 android:background="@drawable/back_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
             <ImageButton
-                android:layout_margin="10dp"
-                android:layout_gravity="end"
                 android:id="@+id/savebtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_margin="10dp"
                 android:background="@drawable/back_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/bookmark_unfocused" />
 
 
-
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
         android:clipToPadding="false"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:padding="20dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/food_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Lemon Shish Kebab"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/sourceName"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="By Foodista.com"
-                    android:textSize="17sp" />
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/food_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Lemon Shish Kebab"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flexboxLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:justifyContent="space_evenly"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                    <TextView
+                        android:id="@+id/sourceName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="By Foodista.com"
+                        android:textSize="17sp" />
 
-                <TextView
-                    android:id="@+id/minutes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                </LinearLayout>
 
-                    android:layout_weight="1"
-                    android:drawableStart="@drawable/stopwatch"
-                    android:gravity="center"
-                    android:text="  54 Mins"
-                    android:textColor="#808080"
-                    android:textSize="15sp"
-                    tools:layout_editor_absoluteX="72dp" />
-
-                <TextView
-                    android:id="@+id/calories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-
-                    android:drawableStart="@drawable/kcal"
-                    android:gravity="center"
-                    android:text="  45 Kcal"
-                    android:textColor="#808080"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="100dp" />
-
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flexboxLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:contextClickable="false"
-                android:orientation="horizontal"
-                app:justifyContent="space_between"
-                app:layout_constraintEnd_toEndOf="@+id/flexboxLayout"
-                app:layout_constraintStart_toStartOf="@+id/flexboxLayout"
-                app:layout_constraintTop_toBottomOf="@+id/flexboxLayout">
-
-                <TextView
-                    android:id="@+id/isCheap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:drawableStart="@drawable/cheap_false"
-                    android:gravity="center"
-                    android:textColor="#FF0000"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/isGlutenFree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:drawableStart="@drawable/gluten_free_false"
-                    android:gravity="center"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="100dp" />
-
-                <TextView
-                    android:id="@+id/isVegetarian"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:drawableStart="@drawable/vegetarian_false"
-                    android:gravity="center"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="201dp" />
-
-                <TextView
-                    android:id="@+id/isVegan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableStart="@drawable/vegan_false"
-                    android:gravity="center"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="302dp" />
-
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flexboxLayout3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:contextClickable="false"
-                android:orientation="horizontal"
-                app:justifyContent="space_between"
-                app:layout_constraintEnd_toEndOf="@+id/flexboxLayout2"
-                app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
-
-                <TextView
-                    android:id="@+id/isCheaptext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Cheap"
-                    android:textColor="#FF0000"
-                    android:textSize="15sp"
-                    tools:layout_editor_absoluteX="10dp"
-                    tools:layout_editor_absoluteY="10dp" />
-
-
-                <TextView
-                    android:id="@+id/isGlutenFreetext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-
-                    android:gravity="center"
-                    android:text="Gluten-Free"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="100dp"
-                    tools:layout_editor_absoluteY="10dp" />
-
-                <TextView
-                    android:id="@+id/isVegetariantext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Vegetarian"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="201dp"
-                    tools:layout_editor_absoluteY="10dp" />
-
-                <TextView
-                    android:id="@+id/isVegantext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Vegan"
-                    android:textColor="#FF0000"
-                    android:textSize="14sp"
-                    tools:layout_editor_absoluteX="302dp"
-                    tools:layout_editor_absoluteY="10dp" />
-
-
-            </com.google.android.flexbox.FlexboxLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:textColor="#000000"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.8"
-                    android:text="LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLore"
-                    android:textColor="#808080" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="match_parent"
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/flexboxLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Instructions"
-                    android:textColor="#000000"
-                    android:textSize="25sp" />
+                    android:orientation="horizontal"
+                    app:justifyContent="space_evenly"
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                    <TextView
+                        android:id="@+id/minutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/stopwatch"
+                        android:gravity="center"
+                        android:text="  54 Mins"
+                        android:textColor="#808080"
+                        android:textSize="15sp"
+                        tools:layout_editor_absoluteX="72dp" />
+
+                    <TextView
+                        android:id="@+id/calories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+
+                        android:drawableStart="@drawable/kcal"
+                        android:gravity="center"
+                        android:text="  45 Kcal"
+                        android:textColor="#808080"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="100dp" />
+
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/flexboxLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:contextClickable="false"
+                    android:orientation="horizontal"
+                    app:justifyContent="space_between"
+                    app:layout_constraintEnd_toEndOf="@+id/flexboxLayout"
+                    app:layout_constraintStart_toStartOf="@+id/flexboxLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/flexboxLayout">
+
+                    <TextView
+                        android:id="@+id/isCheap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/cheap_false"
+                        android:gravity="center"
+                        android:textColor="#FF0000"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/isGlutenFree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/gluten_free_false"
+                        android:gravity="center"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="100dp" />
+
+                    <TextView
+                        android:id="@+id/isVegetarian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/vegetarian_false"
+                        android:gravity="center"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="201dp" />
+
+                    <TextView
+                        android:id="@+id/isVegan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/vegan_false"
+                        android:gravity="center"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="302dp" />
+
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/flexboxLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:contextClickable="false"
+                    android:orientation="horizontal"
+                    app:justifyContent="space_between"
+                    app:layout_constraintEnd_toEndOf="@+id/flexboxLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
+
+                    <TextView
+                        android:id="@+id/isCheaptext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Cheap"
+                        android:textColor="#FF0000"
+                        android:textSize="15sp"
+                        tools:layout_editor_absoluteX="10dp"
+                        tools:layout_editor_absoluteY="10dp" />
+
+
+                    <TextView
+                        android:id="@+id/isGlutenFreetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+
+                        android:gravity="center"
+                        android:text="Gluten-Free"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="100dp"
+                        tools:layout_editor_absoluteY="10dp" />
+
+                    <TextView
+                        android:id="@+id/isVegetariantext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Vegetarian"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="201dp"
+                        tools:layout_editor_absoluteY="10dp" />
+
+                    <TextView
+                        android:id="@+id/isVegantext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Vegan"
+                        android:textColor="#FF0000"
+                        android:textSize="14sp"
+                        tools:layout_editor_absoluteX="302dp"
+                        tools:layout_editor_absoluteY="10dp" />
+
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textColor="#000000"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:text="LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLore"
+                        android:textColor="#808080" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Instructions"
+                        android:textColor="#000000"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/instructionsrecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
+                    android:id="@+id/instructionsRecycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1200dp"
+                    app:layout_constraintEnd_toEndOf="@+id/instructionsRecycler"
+                    app:layout_constraintStart_toStartOf="@+id/instructionsRecycler"
+                    app:layout_constraintTop_toBottomOf="@+id/instructionsRecycler" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/food_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Lemon Shish Kebab"
-                android:textColor="#000000"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/sourceName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="By Foodista.com"
-                android:textSize="17sp" />
-
-        </LinearLayout>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flexboxLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            app:justifyContent="space_evenly"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-            <TextView
-                android:id="@+id/minutes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:drawableStart="@drawable/stopwatch"
-                android:gravity="center"
-                android:text="  54 Mins"
-                android:textColor="#808080"
-                android:textSize="15sp"
-                tools:layout_editor_absoluteX="72dp" />
-
-            <TextView
-                android:id="@+id/calories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-
-                android:drawableStart="@drawable/kcal"
-                android:gravity="center"
-                android:text="  45 Kcal"
-                android:textColor="#808080"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="100dp" />
-
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flexboxLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:contextClickable="false"
-            android:orientation="horizontal"
-            app:justifyContent="space_between"
-            app:layout_constraintEnd_toEndOf="@+id/flexboxLayout"
-            app:layout_constraintStart_toStartOf="@+id/flexboxLayout"
-            app:layout_constraintTop_toBottomOf="@+id/flexboxLayout">
-
-            <TextView
-                android:id="@+id/isCheap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:drawableStart="@drawable/cheap_false"
-                android:gravity="center"
-                android:text=" Cheap"
-                android:textColor="#FF0000"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/isGlutenFree"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:drawableStart="@drawable/gluten_free_false"
-                android:gravity="center"
-                android:text="  Gluten-Free"
-                android:textColor="#FF0000"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="100dp" />
-
-            <TextView
-                android:id="@+id/isVegetarian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_weight="1"
-                android:drawableStart="@drawable/vegetarian_false"
-                android:gravity="center"
-                android:text="  Vegetarian"
-                android:textColor="#FF0000"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="201dp" />
-
-            <TextView
-                android:id="@+id/isVegan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/vegan_false"
-                android:gravity="center"
-                android:text="   Vegan"
-                android:textColor="#FF0000"
-                android:textSize="14sp"
-                tools:layout_editor_absoluteX="302dp" />
-
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/flexboxLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/flexboxLayout2">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:text="LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLore"
-                android:textColor="#808080" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Instructions"
-                android:textColor="#000000"
-                android:textSize="25sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/instructionsrecycler"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RandomApiMain> call = service.getRandomRecipes(
-                "d476d45617e540db9c0d6dcd8cd02a1c",
+                "54dff7b37e4a49ac8585d04bb5e3ddaa",
                 "main dish",
                 5
         );

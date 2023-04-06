@@ -1,6 +1,9 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,6 +15,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.uygulamalarim.foodrecipeapp.Adapter.InstructionsAdapter;
+import com.uygulamalarim.foodrecipeapp.Adapter.RandomAdapter;
+import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.RecipeModel.RecipeModelMain;
 import com.uygulamalarim.foodrecipeapp.R;
 import com.uygulamalarim.foodrecipeapp.Retrofit.ApiInterface;
@@ -33,6 +39,10 @@ public class DetailedPage extends AppCompatActivity {
     RoundedImageView foodpic;
     ImageButton backbtn;
 
+    private RecyclerView instructionsRecycler;
+    private InstructionsAdapter instructionsAdapter;
+    private List<RecipeModelMain> instructionsList = new ArrayList<RecipeModelMain>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +50,8 @@ public class DetailedPage extends AppCompatActivity {
         Intent intent = getIntent();
         String food_name = intent.getStringExtra("FOOD_NAME");
         TextView foodname=findViewById(R.id.food_name);
+
+
 
         initView();
 
@@ -61,7 +73,7 @@ public class DetailedPage extends AppCompatActivity {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RecipeModelMain> call = service.getFullRecipe(
-                "d476d45617e540db9c0d6dcd8cd02a1c",
+                "54dff7b37e4a49ac8585d04bb5e3ddaa",
                 food_name,
                 true,
                 true
@@ -84,6 +96,11 @@ public class DetailedPage extends AppCompatActivity {
                     boolean is_vegan=randomApiMain.getResults().get(0).getVegan();
                     String _calories= String.valueOf(randomApiMain.getResults().get(0).getNutrition().getNutrients().get(0).getAmount());
                     String _desc=randomApiMain.getResults().get(0).getSummary().toString();
+
+
+                    for (int i = 1; i <= randomApiMain.getResults().get(0).getAnalyzedInstructions().get(0).getSteps().size(); i++) {
+                        instructionsList.add(randomApiMain);
+                    }
 
 
 
@@ -140,6 +157,11 @@ public class DetailedPage extends AppCompatActivity {
         isVegetariantext=findViewById(R.id.isVegetariantext);
         isVegantext=findViewById(R.id.isVegantext);
         backbtn=findViewById(R.id.backbtn);
+
+        instructionsRecycler = findViewById(R.id.instructionsRecycler);
+        instructionsAdapter = new InstructionsAdapter(instructionsList);
+        instructionsRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        instructionsRecycler.setAdapter(instructionsAdapter);
     }
 
 }
