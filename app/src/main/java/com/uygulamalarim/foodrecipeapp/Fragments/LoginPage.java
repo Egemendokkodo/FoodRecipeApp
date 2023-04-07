@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,7 +66,7 @@ public class LoginPage extends AppCompatActivity {
                 if (loginUsername.getText().toString().isEmpty()||loginpassword.getText().toString().isEmpty()){
                     Toast.makeText(LoginPage.this, "Please input all the fields.", Toast.LENGTH_SHORT).show();
                 }else{
-                    checkUser();
+                    checkUser(view);
                 }
             }
         });
@@ -81,7 +83,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    public void checkUser(){
+    public void checkUser(View view){
         String username=loginUsername.getText().toString().trim();
         String password=loginpassword.getText().toString().trim();
 
@@ -96,13 +98,13 @@ public class LoginPage extends AppCompatActivity {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         User user = userSnapshot.getValue(User.class);
                         if (user.getPassword().equals(password)) {
-                            Toast.makeText(LoginPage.this, "GİRİŞ BALŞARILI", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this, "GİRİŞ BAŞARILI", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(LoginPage.this, "Invalid Credentials.", Toast.LENGTH_SHORT).show();
+                            showSnackbar(view,"Invalid credentials.");
                         }
                     }
                 } else {
-                    Toast.makeText(LoginPage.this, "Invalid Credentials.", Toast.LENGTH_SHORT).show();
+                    showSnackbar(view,"Invalid credentials.");
                 }
             }
 
@@ -113,6 +115,24 @@ public class LoginPage extends AppCompatActivity {
         });
 
 
+
+    }
+    private void showSnackbar(View view,String warnMessage){
+        final Snackbar snackbar = Snackbar.make(view, warnMessage, Snackbar.LENGTH_SHORT);
+
+        snackbar.show();
+
+        new CountDownTimer(2000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                snackbar.dismiss();
+            }
+        }.start();
 
     }
 }
