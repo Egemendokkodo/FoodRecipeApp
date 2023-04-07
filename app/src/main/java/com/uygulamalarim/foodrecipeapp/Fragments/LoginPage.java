@@ -20,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.uygulamalarim.foodrecipeapp.MainActivity;
 import com.uygulamalarim.foodrecipeapp.R;
+import com.uygulamalarim.foodrecipeapp.util.FirebaseAuth;
 import com.uygulamalarim.foodrecipeapp.util.User;
 
 import java.util.Objects;
@@ -66,7 +68,9 @@ public class LoginPage extends AppCompatActivity {
                 if (loginUsername.getText().toString().isEmpty()||loginpassword.getText().toString().isEmpty()){
                     Toast.makeText(LoginPage.this, "Please input all the fields.", Toast.LENGTH_SHORT).show();
                 }else{
-                    checkUser(view);
+                    String username=loginUsername.getText().toString().trim();
+                    String password=loginpassword.getText().toString().trim();
+                    new FirebaseAuth().loginToDB(username,password,view,LoginPage.this,getApplicationContext());
                 }
             }
         });
@@ -83,56 +87,4 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    public void checkUser(View view){
-        String username=loginUsername.getText().toString().trim();
-        String password=loginpassword.getText().toString().trim();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users");
-
-
-        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                        User user = userSnapshot.getValue(User.class);
-                        if (user.getPassword().equals(password)) {
-                            Toast.makeText(LoginPage.this, "GİRİŞ BAŞARILI", Toast.LENGTH_SHORT).show();
-                        } else {
-                            showSnackbar(view,"Invalid credentials.");
-                        }
-                    }
-                } else {
-                    showSnackbar(view,"Invalid credentials.");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Hata oluştu
-            }
-        });
-
-
-
-    }
-    private void showSnackbar(View view,String warnMessage){
-        final Snackbar snackbar = Snackbar.make(view, warnMessage, Snackbar.LENGTH_SHORT);
-
-        snackbar.show();
-
-        new CountDownTimer(2000, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-            }
-
-            @Override
-            public void onFinish() {
-                snackbar.dismiss();
-            }
-        }.start();
-
-    }
 }

@@ -1,25 +1,17 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.uygulamalarim.foodrecipeapp.R;
-import com.uygulamalarim.foodrecipeapp.util.AuthHelper;
+import com.uygulamalarim.foodrecipeapp.util.FirebaseAuth;
 
 public class SignUpPage extends AppCompatActivity {
 
@@ -60,58 +52,8 @@ public class SignUpPage extends AppCompatActivity {
                 String password= enterPassword.getText().toString();
                 String repeatpassword= repeatPassword.getText().toString();
 
-                if (enterUsername.length()<=4||username.contains(".")||username.contains("#")||username.contains("$")||username.contains("[")||username.contains("]")){
-                    showSnackbar(view,"Username must not contain '.', '#', '$', '[', or ']' and length must be >=4");
+                new FirebaseAuth().saveToDb(view,getApplicationContext(),SignUpPage.this,username,email,password,repeatpassword,enterUsername,enterEmail);
 
-
-                }else{
-                    reference.child(username).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                enterUsername.setError("Username already exists.");
-                            } else {
-                                // check if email already exists
-                                reference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            enterEmail.setError("Email already exists.");
-                                        } else {
-                                            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || repeatpassword.isEmpty()) {
-                                                showSnackbar(view,"Please input all the fields.");
-                                            } else {
-                                                if (!password.equals(repeatpassword)) {
-                                                    showSnackbar(view,"Passwords does not match.");
-                                                }
-                                                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(enterEmail.getText().toString()).matches()){
-                                                    showSnackbar(view,"Email is invalid.");
-                                                }
-                                                else {
-                                                    AuthHelper authHelper= new AuthHelper(username, email, password);
-                                                    reference.child(username).setValue(authHelper);
-                                                    Intent i= new Intent(SignUpPage.this, LoginPage.class);
-                                                    i.putExtra("username", username);
-                                                    startActivity(i);
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
 
 
 
@@ -123,23 +65,6 @@ public class SignUpPage extends AppCompatActivity {
 
 
     }
-    private void showSnackbar(View view,String warnMessage){
-        final Snackbar snackbar = Snackbar.make(view, warnMessage, Snackbar.LENGTH_SHORT);
 
-        snackbar.show();
-
-        new CountDownTimer(2000, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-            }
-
-            @Override
-            public void onFinish() {
-                snackbar.dismiss();
-            }
-        }.start();
-
-    }
 
 }
