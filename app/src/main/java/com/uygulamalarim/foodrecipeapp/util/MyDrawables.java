@@ -15,10 +15,6 @@ public class MyDrawables {
     }
 
     public Drawable getCheapTrueDrawable() {
-
-
-
-
         Drawable cheap_true_drawable=ContextCompat.getDrawable(context, R.drawable.cheap_true);
         cheap_true_drawable.setBounds(0, 0, cheap_true_drawable.getIntrinsicWidth(), cheap_true_drawable.getIntrinsicHeight());
         return cheap_true_drawable;

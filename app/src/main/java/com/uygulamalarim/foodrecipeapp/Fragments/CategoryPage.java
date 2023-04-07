@@ -99,7 +99,6 @@ public class CategoryPage extends AppCompatActivity implements CategoryRecycler.
     @Override
     public void onItemClick(View view, int position) {
         String food_name=categoryList.get(position).getResults().get(position).getTitle();
-        //Toast.makeText(getContext(), randomRecipeList.get(position).getRecipes().get(position).getTitle(), Toast.LENGTH_SHORT).show();
         Intent i=new Intent(this,DetailedPage.class);
         i.putExtra("FOOD_NAME",food_name);
         startActivity(i);
