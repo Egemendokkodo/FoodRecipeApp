@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -18,6 +19,7 @@ import com.uygulamalarim.foodrecipeapp.R;
 public class LandingActivity extends AppCompatActivity {
 
     TextView continueWithout;
+    Button loginPageBtn;
 
     VideoView videov;
     MediaPlayer nMediaPlayer;
@@ -30,6 +32,17 @@ public class LandingActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_landing);
+
+        loginPageBtn=findViewById(R.id.loginBtn);
+
+        loginPageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),LoginPage.class);
+                startActivity(i);
+            }
+        });
+
 
 
         continueWithout=findViewById(R.id.continueWithout);
