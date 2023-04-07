@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "894541382511",
+    "project_id": "foodrecipeapp-9435e",
+    "storage_bucket": "foodrecipeapp-9435e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894541382511:android:f07056ef9235fc8531de9a",
+        "android_client_info": {
+          "package_name": "com.uygulamalarim.foodrecipeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894541382511-fvignnqn28a1i90ujfh2v0mf2k7lub1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFc4xLTvn0PJXps32WbURYVWYN7OaGG44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894541382511-fvignnqn28a1i90ujfh2v0mf2k7lub1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

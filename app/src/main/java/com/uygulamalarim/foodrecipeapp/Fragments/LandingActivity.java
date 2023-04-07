@@ -18,7 +18,7 @@ import com.uygulamalarim.foodrecipeapp.R;
 
 public class LandingActivity extends AppCompatActivity {
 
-    TextView continueWithout;
+    TextView continueWithout,createNewOneBtn;
     Button loginPageBtn;
 
     VideoView videov;
@@ -32,9 +32,8 @@ public class LandingActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_landing);
-
         loginPageBtn=findViewById(R.id.loginBtn);
-
+        createNewOneBtn=findViewById(R.id.createNewOneBtn);
         loginPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +53,17 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-
-
         videov = findViewById(R.id.videoView);
         landingPageVideo();
+
+
+        createNewOneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),SignUpPage.class);
+                startActivity(i);
+            }
+        });
 
 
     }
