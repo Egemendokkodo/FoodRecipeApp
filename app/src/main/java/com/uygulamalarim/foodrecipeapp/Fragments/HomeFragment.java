@@ -25,6 +25,7 @@ import com.uygulamalarim.foodrecipeapp.Model.CategoryModel.CategoryDomain;
 import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.SearchModel.SearchModelMain;
 import com.uygulamalarim.foodrecipeapp.R;
+import com.uygulamalarim.foodrecipeapp.Retrofit.ApiCalls;
 import com.uygulamalarim.foodrecipeapp.Retrofit.ApiInterface;
 
 import java.util.ArrayList;
@@ -85,57 +86,11 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
 
 
         initView(view);
-        makeRandomRecycler();
 
 
+        new ApiCalls().searchFunctionality(getContext(),searchRecipeHome,searchRecyclerHome,searchRecyclerList,searchRecyclerAdapter);
+        new ApiCalls().makeRandomRecycler(getContext(),randomRecipeList,randomAdapter);
 
-        searchRecipeHome.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                if (query.isEmpty()){
-                    searchRecyclerHome.setVisibility(View.GONE);
-                }else{
-                    searchRecyclerHome.setVisibility(View.VISIBLE);
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://api.spoonacular.com/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    ApiInterface service = retrofit.create(ApiInterface.class);
-                    Call<SearchModelMain> call = service.getFoodsBySearch(
-                            "f4b1cd31d74f45e2b60905a483988e20",
-                            query
-
-                    );
-                    call.enqueue(new Callback<SearchModelMain>() {
-                        @Override
-                        public void onResponse(Call<SearchModelMain> call, Response<SearchModelMain> response) {
-                            if (response.isSuccessful()) {
-                                SearchModelMain randomApiMain = response.body();
-                                searchRecyclerList.clear();
-                                for (int i = 0; i <randomApiMain.getNumber() ; i++) {
-                                    searchRecyclerList.add(randomApiMain);
-                                }
-
-
-                                searchRecyclerAdapter.notifyDataSetChanged();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SearchModelMain> call, Throwable t) {
-                            Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                return false;
-            }
-        });
 
     }
 
@@ -152,38 +107,6 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         searchRecyclerHome.setAdapter(searchRecyclerAdapter);
     }
 
-    private void makeRandomRecycler() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.spoonacular.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiInterface service = retrofit.create(ApiInterface.class);
-        Call<RandomApiMain> call = service.getRandomRecipes(
-                "f4b1cd31d74f45e2b60905a483988e20",
-                "main dish",
-                5
-        );
-
-        call.enqueue(new Callback<RandomApiMain>() {
-            @Override
-            public void onResponse(Call<RandomApiMain> call, Response<RandomApiMain> response) {
-                if (response.isSuccessful()) {
-                    RandomApiMain randomApiMain = response.body();
-                    randomRecipeList.clear();
-                    for (int i = 0; i < 5; i++) {
-                        randomRecipeList.add(randomApiMain);
-                    }
-                    randomAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RandomApiMain> call, Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private void recyclerViewCategory(View view) {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false);
