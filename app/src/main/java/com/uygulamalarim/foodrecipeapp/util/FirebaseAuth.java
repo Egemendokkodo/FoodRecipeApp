@@ -85,7 +85,7 @@ public class FirebaseAuth {
 
 
 
-    private void showSnackbar(View view, String warnMessage){
+    public void showSnackbar(View view, String warnMessage){
         final Snackbar snackbar = Snackbar.make(view, warnMessage, Snackbar.LENGTH_SHORT);
 
         snackbar.show();
@@ -117,6 +117,7 @@ public class FirebaseAuth {
                         User user = userSnapshot.getValue(User.class);
                         if (user.getPassword().equals(password)) {
                             Intent i=new Intent(context, MainActivity.class);
+                            i.putExtra("username",username);
                             activity.startActivity(i);
                             activity.finish();
                         } else {

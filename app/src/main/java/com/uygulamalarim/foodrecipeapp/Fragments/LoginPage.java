@@ -63,8 +63,6 @@ public class LoginPage extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //validate username and password then firebase login
-
                 if (loginUsername.getText().toString().isEmpty()||loginpassword.getText().toString().isEmpty()){
                     Toast.makeText(LoginPage.this, "Please input all the fields.", Toast.LENGTH_SHORT).show();
                 }else{
@@ -80,6 +78,7 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(getApplicationContext(),SignUpPage.class);
                 startActivity(i);
+                finish();
             }
         });
 

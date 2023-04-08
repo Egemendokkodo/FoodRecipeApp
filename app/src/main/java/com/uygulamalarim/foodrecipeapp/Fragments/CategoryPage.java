@@ -69,7 +69,7 @@ public class CategoryPage extends AppCompatActivity implements CategoryRecycler.
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<CategoryRecyclerModel> call = service.getFoodsByCategoryName(
-                "257f8904a2aa42dcad6a8d48f6a4d89b",
+                "f4b1cd31d74f45e2b60905a483988e20",
                 category_name.toLowerCase(Locale.ROOT),
                 5
         );

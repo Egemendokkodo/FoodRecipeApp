@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -14,13 +17,11 @@ import com.uygulamalarim.foodrecipeapp.Fragments.HomeFragment;
 import com.uygulamalarim.foodrecipeapp.Fragments.ProfileFragment;
 import com.uygulamalarim.foodrecipeapp.Fragments.SavedFragment;
 import com.uygulamalarim.foodrecipeapp.Fragments.SearchFragment;
+import com.uygulamalarim.foodrecipeapp.util.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomnavbar;
-
-    private static final String API_KEY = "OJSordFi1bhz2vKkKY4gFUtIBvqWlIrf";
-    private static final String BASE_URL = "https://api.apilayer.com/spoonacular/recipes/complexSearch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentContainer, new HomeFragment())
                 .commit();
+
 
         bottomnavbar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -46,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(new SavedFragment());
                         break;
                     case R.id.profilepage:
+
                         changeFragment(new ProfileFragment());
+
                         break;
+
                 }
                 return true;
             }
