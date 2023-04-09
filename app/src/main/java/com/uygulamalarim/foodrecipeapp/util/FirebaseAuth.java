@@ -21,6 +21,8 @@ import com.uygulamalarim.foodrecipeapp.MainActivity;
 public class FirebaseAuth {
 
 
+
+
     public void saveToDb(View view, Context context, Activity activity, String username, String email, String password, String repeatpassword, EditText enterUsername, EditText enterEmail){
 
         FirebaseDatabase database= FirebaseDatabase.getInstance();

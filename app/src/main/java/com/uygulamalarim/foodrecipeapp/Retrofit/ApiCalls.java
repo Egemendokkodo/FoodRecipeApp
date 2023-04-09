@@ -26,8 +26,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiCalls {
 
+    private String BASE_URL="https://api.spoonacular.com/";
+    private String API="f4b1cd31d74f45e2b60905a483988e20";
+
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.spoonacular.com/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -50,7 +53,7 @@ public class ApiCalls {
 
                     ApiInterface service = retrofit.create(ApiInterface.class);
                     Call<SearchModelMain> call = service.getFoodsBySearch(
-                            "f4b1cd31d74f45e2b60905a483988e20",
+                            API,
                             query
 
                     );
@@ -83,7 +86,7 @@ public class ApiCalls {
 
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RandomApiMain> call = service.getRandomRecipes(
-                "f4b1cd31d74f45e2b60905a483988e20",
+                API,
                 "main dish",
                 5
         );
@@ -112,7 +115,7 @@ public class ApiCalls {
     public void makeDetailedPageApiCall(Context context, String food_name, List<RecipeModelMain> randomRecipeList, List<RecipeModelMain> instructionsList, TextView foodname, TextView sourcename, TextView minutes, TextView description, TextView calories, RoundedImageView foodpic,TextView ischeap,TextView isCheaptext,TextView isglutenfree,TextView isGlutenFreetext,TextView isvegetarian,TextView isVegetariantext,TextView isvegan,TextView isVegantext){
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RecipeModelMain> call = service.getFullRecipe(
-                "f4b1cd31d74f45e2b60905a483988e20",
+                API,
                 food_name,
                 true,
                 true
