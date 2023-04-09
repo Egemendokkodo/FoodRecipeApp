@@ -39,7 +39,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler,CategoryAdapter.CategorySelectListener {
+public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler,CategoryAdapter.CategorySelectListener,SearchRecyclerAdapter.onClickListenerRecyclerSearch {
     private RecyclerView recyclerViewCategory;
     private RecyclerView.Adapter adapter;
 
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
 
         searchRecipeHome=view.findViewById(R.id.searchRecipeHome);
         searchRecyclerHome=view.findViewById(R.id.searchRecyclerHome);
-        searchRecyclerAdapter=new SearchRecyclerAdapter(searchRecyclerList);//this kısmı onclick recycler olacak
+        searchRecyclerAdapter=new SearchRecyclerAdapter(searchRecyclerList,this);//this kısmı onclick recycler olacak
         searchRecyclerHome.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         searchRecyclerHome.setAdapter(searchRecyclerAdapter);
     }
@@ -139,6 +139,14 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         String food_category=category.get(position).getTitle();
         Intent i=new Intent(getContext(),CategoryPage.class);
         i.putExtra("CATEGORY_NAME",food_category);
+        startActivity(i);
+
+    }
+    @Override
+    public void onClickRecyclerSearch(int position) {
+        String food_name=searchRecyclerList.get(position).getResults().get(position).getTitle();
+        Intent i=new Intent(getContext(),DetailedPage.class);
+        i.putExtra("FOOD_NAME",food_name);
         startActivity(i);
 
     }

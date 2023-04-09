@@ -20,9 +20,11 @@ import java.util.List;
 
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder>{
     List<SearchModelMain> searchedList;
+    private onClickListenerRecyclerSearch onClickListenerRecyclerSearch;
 
-    public SearchRecyclerAdapter(List<SearchModelMain> searchedList) {
+    public SearchRecyclerAdapter(List<SearchModelMain> searchedList,onClickListenerRecyclerSearch onClickListenerRecyclerSearch) {
         this.searchedList=searchedList;
+        this.onClickListenerRecyclerSearch=onClickListenerRecyclerSearch;
     }
 
 
@@ -30,7 +32,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     @Override
     public SearchRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate= LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_search_recycler,parent,false);
-        return new SearchRecyclerAdapter.ViewHolder(inflate);
+        return new SearchRecyclerAdapter.ViewHolder(inflate,onClickListenerRecyclerSearch);
     }
 
     @Override
@@ -45,21 +47,33 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
     }
 
+    public interface onClickListenerRecyclerSearch{
+        void onClickRecyclerSearch(int pos);
+    }
+
     @Override
     public int getItemCount() {
         return searchedList.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView searchName;
         ImageView searchImage;
+        onClickListenerRecyclerSearch onClickListenerRecyclerSearch;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,onClickListenerRecyclerSearch onClickListenerRecyclerSearch) {
             super(itemView);
             searchName=itemView.findViewById(R.id.foodNameCategory);
             searchImage=itemView.findViewById(R.id.foodPicCategory);
-
+            itemView.setOnClickListener((View.OnClickListener) this);
+            this.onClickListenerRecyclerSearch=onClickListenerRecyclerSearch;
 
         }
+
+        @Override
+        public void onClick(View view) {
+            onClickListenerRecyclerSearch.onClickRecyclerSearch(getAdapterPosition());
+        }
     }
+
 }
