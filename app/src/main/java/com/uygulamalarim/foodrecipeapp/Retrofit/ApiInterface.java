@@ -18,5 +18,7 @@ public interface ApiInterface {
     Call<CategoryRecyclerModel> getFoodsByCategoryName(@Query("apiKey") String apiKey, @Query("type") String type, @Query("number") int number);
     @GET("recipes/complexSearch")
     Call<SearchModelMain> getFoodsBySearch(@Query("apiKey") String apiKey, @Query("query") String query);
+    @GET("recipes/complexSearch")
+    Call<SearchModelMain> getForGridRecycler(@Query("apiKey") String apiKey, @Query("type") String type, @Query("number") int number);
 
 }

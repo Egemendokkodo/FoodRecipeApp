@@ -2,6 +2,7 @@ package com.uygulamalarim.foodrecipeapp.Retrofit;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiCalls {
 
-    private String BASE_URL="https://api.spoonacular.com/";
-    private String API="f4b1cd31d74f45e2b60905a483988e20";
+    private final String BASE_URL="https://api.spoonacular.com/";
+    private final String API="b32ea6d4f7184646926bafbcaaefe287";
 
-    private Retrofit retrofit = new Retrofit.Builder()
+    private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
@@ -60,15 +61,24 @@ public class ApiCalls {
                     call.enqueue(new Callback<SearchModelMain>() {
                         @Override
                         public void onResponse(Call<SearchModelMain> call, Response<SearchModelMain> response) {
-                            if (response.isSuccessful()) {
-                                SearchModelMain randomApiMain = response.body();
-                                searchRecyclerList.clear();
-                                for (int i = 0; i <randomApiMain.getNumber() ; i++) {
-                                    searchRecyclerList.add(randomApiMain);
+                            if (query.isEmpty()){
+                                searchRecyclerHome.setVisibility(View.GONE);
+                            }else{
+
+                                if (response.isSuccessful()) {
+                                    SearchModelMain randomApiMain = response.body();
+                                    if (randomApiMain.getTotalResults() == 0) {
+                                        searchRecyclerHome.setVisibility(View.GONE);
+                                    } else {
+                                        searchRecyclerHome.setVisibility(View.VISIBLE);
+                                        searchRecyclerList.clear();
+                                        for (int i = 0; i < randomApiMain.getNumber(); i++) {
+                                            searchRecyclerList.add(randomApiMain);
+                                        }
+                                        searchRecyclerAdapter.notifyDataSetChanged();
+                                    }
                                 }
 
-
-                                searchRecyclerAdapter.notifyDataSetChanged();
                             }
                         }
 
@@ -183,5 +193,31 @@ public class ApiCalls {
             }
         });
     }
+    public void makeGridRecycler(Context context,List<SearchModelMain> gridList, RecyclerView.Adapter gridAdapter) {
+
+        ApiInterface service = retrofit.create(ApiInterface.class);
+        Call<SearchModelMain> call = service.getForGridRecycler(API, "main dish", 51);
+
+        call.enqueue(new Callback<SearchModelMain>() {
+            @Override
+            public void onResponse(Call<SearchModelMain> call, Response<SearchModelMain> response) {
+                if (response.isSuccessful()) {
+                    SearchModelMain randomApiMain = response.body();
+                    gridList.clear();
+                    for (int i = 0; i < randomApiMain.getNumber(); i++) {
+                        gridList.add(randomApiMain);
+                    }
+
+                    gridAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SearchModelMain> call, Throwable t) {
+                Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }

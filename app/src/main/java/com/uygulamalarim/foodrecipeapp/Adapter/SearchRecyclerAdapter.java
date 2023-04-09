@@ -1,10 +1,12 @@
 package com.uygulamalarim.foodrecipeapp.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,14 +29,19 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     @NonNull
     @Override
     public SearchRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate= LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_category_recycler,parent,false);
+        View inflate= LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_search_recycler,parent,false);
         return new SearchRecyclerAdapter.ViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchRecyclerAdapter.ViewHolder holder, int position) {
-        holder.searchName.setText(searchedList.get(position).getResults().get(position).getTitle());
-        Glide.with(holder.itemView.getContext()).load(searchedList.get(position).getResults().get(position).getImage()).into(holder.searchImage);
+        try{
+            holder.searchName.setText(searchedList.get(position).getResults().get(position).getTitle());
+            Glide.with(holder.itemView.getContext()).load(searchedList.get(position).getResults().get(position).getImage()).into(holder.searchImage);
+
+        }catch (IndexOutOfBoundsException e){
+            Log.d("ERRORMSG","ıNDEX OUT OF BOUNDS"+e);
+        }
 
     }
 

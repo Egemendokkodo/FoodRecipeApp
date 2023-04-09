@@ -3,13 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f2f2f2"
-        android:text="search fragment" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchRecipeSearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/searchview_bg2"
+                android:elevation="5dp"
+                android:focusedByDefault="false"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@null"
+                app:queryHint="Search for recipes">
+
+            </androidx.appcompat.widget.SearchView>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gridRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </FrameLayout>
