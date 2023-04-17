@@ -1,9 +1,12 @@
 package com.uygulamalarim.foodrecipeapp.Retrofit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +18,9 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.RecipeModel.RecipeModelMain;
 import com.uygulamalarim.foodrecipeapp.Model.SearchModel.SearchModelMain;
+import com.uygulamalarim.foodrecipeapp.util.FirebaseAuth;
 import com.uygulamalarim.foodrecipeapp.util.MyDrawables;
+import com.uygulamalarim.foodrecipeapp.util.UserData;
 
 import java.util.List;
 
@@ -28,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiCalls {
 
     private final String BASE_URL="https://api.spoonacular.com/";
-    private final String API="b32ea6d4f7184646926bafbcaaefe287";
+    private final String API="966347ce995847869022a2e31b4d08c0";
 
     private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -122,7 +127,7 @@ public class ApiCalls {
     }
 
 
-    public void makeDetailedPageApiCall(Context context, String food_name, List<RecipeModelMain> randomRecipeList, List<RecipeModelMain> instructionsList, TextView foodname, TextView sourcename, TextView minutes, TextView description, TextView calories, RoundedImageView foodpic,TextView ischeap,TextView isCheaptext,TextView isglutenfree,TextView isGlutenFreetext,TextView isvegetarian,TextView isVegetariantext,TextView isvegan,TextView isVegantext){
+    public void makeDetailedPageApiCall(Context context, String food_name, List<RecipeModelMain> randomRecipeList, List<RecipeModelMain> instructionsList, TextView foodname, TextView sourcename, TextView minutes, TextView description, TextView calories, RoundedImageView foodpic, TextView ischeap, TextView isCheaptext, TextView isglutenfree, TextView isGlutenFreetext, TextView isvegetarian, TextView isVegetariantext, TextView isvegan, TextView isVegantext, ImageButton savedbtn){
         ApiInterface service = retrofit.create(ApiInterface.class);
         Call<RecipeModelMain> call = service.getFullRecipe(
                 API,
@@ -180,6 +185,19 @@ public class ApiCalls {
                     }
 
 
+                    savedbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+
+                            if(!UserData.getInstance().getUsername().toString().equals("")){
+                                new FirebaseAuth().saveRecipe(UserData.getInstance().getUsername().toString(),food_name.toString(),randomApiMain.getResults().get(0).getImage());
+                                new FirebaseAuth().showSnackbar(view,"Recipe Saved Successfully");
+                            }else{
+                                new FirebaseAuth().showSnackbar(view,"You must login.");
+                            }
+                        }
+                    });
 
 
 
@@ -192,6 +210,8 @@ public class ApiCalls {
                 Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
     public void makeGridRecycler(Context context,List<SearchModelMain> gridList, RecyclerView.Adapter gridAdapter) {
 

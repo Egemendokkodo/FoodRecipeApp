@@ -1,21 +1,19 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.uygulamalarim.foodrecipeapp.Adapter.CategoryAdapter;
 import com.uygulamalarim.foodrecipeapp.Adapter.RandomAdapter;
@@ -26,17 +24,10 @@ import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.SearchModel.SearchModelMain;
 import com.uygulamalarim.foodrecipeapp.R;
 import com.uygulamalarim.foodrecipeapp.Retrofit.ApiCalls;
-import com.uygulamalarim.foodrecipeapp.Retrofit.ApiInterface;
+import com.uygulamalarim.foodrecipeapp.util.UserData;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment implements RandomAdapter.OnClickListenerRecycler,CategoryAdapter.CategorySelectListener,SearchRecyclerAdapter.onClickListenerRecyclerSearch {
@@ -56,6 +47,7 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
     ArrayList<CategoryDomain> category=new ArrayList<>();
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +60,22 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerViewCategory(view);
         TextView helloText=view.findViewById(R.id.helloText);
 
+
         Intent intent = getActivity().getIntent();
         String username = intent.getStringExtra("username");
+
+
         if (username!=null){
             did_login=1;
             helloText.setText("Hello, "+username);
+            UserData.getInstance().setUsername(username);
         }else{
             did_login=0;
             helloText.setText("Hello,");
@@ -88,24 +85,32 @@ public class HomeFragment extends Fragment implements RandomAdapter.OnClickListe
         initView(view);
 
 
-        new ApiCalls().searchFunctionality(getContext(),searchRecipeHome,searchRecyclerHome,searchRecyclerList,searchRecyclerAdapter);
-        new ApiCalls().makeRandomRecycler(getContext(),randomRecipeList,randomAdapter);
+            new ApiCalls()
+                    .searchFunctionality(getContext(),
+                            searchRecipeHome,
+                            searchRecyclerHome,
+                            searchRecyclerList,
+                            searchRecyclerAdapter);
+            new ApiCalls().
+                    makeRandomRecycler(getContext(),
+                            randomRecipeList,
+                            randomAdapter);
 
 
-    }
+        }
 
-    private void initView(View view) {
-        recyclerViewRandom = view.findViewById(R.id.recommendationRecycler);
-        randomAdapter = new RandomAdapter(randomRecipeList,this);
-        recyclerViewRandom.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        recyclerViewRandom.setAdapter(randomAdapter);
+        private void initView(View view) {
+            recyclerViewRandom = view.findViewById(R.id.recommendationRecycler);
+            randomAdapter = new RandomAdapter(randomRecipeList,this);
+            recyclerViewRandom.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+            recyclerViewRandom.setAdapter(randomAdapter);
 
-        searchRecipeHome=view.findViewById(R.id.searchRecipeHome);
-        searchRecyclerHome=view.findViewById(R.id.searchRecyclerHome);
-        searchRecyclerAdapter=new SearchRecyclerAdapter(searchRecyclerList,this);//this kısmı onclick recycler olacak
-        searchRecyclerHome.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        searchRecyclerHome.setAdapter(searchRecyclerAdapter);
-    }
+            searchRecipeHome=view.findViewById(R.id.searchRecipeHome);
+            searchRecyclerHome=view.findViewById(R.id.searchRecyclerHome);
+            searchRecyclerAdapter=new SearchRecyclerAdapter(searchRecyclerList,this);//this kısmı onclick recycler olacak
+            searchRecyclerHome.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+            searchRecyclerHome.setAdapter(searchRecyclerAdapter);
+        }
 
 
     private void recyclerViewCategory(View view) {

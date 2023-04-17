@@ -1,5 +1,7 @@
 package com.uygulamalarim.foodrecipeapp.util;
 
+import java.util.List;
+
 public class AuthHelper {
     String email,username,password;
 
@@ -27,10 +29,13 @@ public class AuthHelper {
         this.password = password;
     }
 
-    public AuthHelper(String username,String email ,String password) {
+
+
+    public AuthHelper(String username, String email , String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+
     }
     public AuthHelper(){
 

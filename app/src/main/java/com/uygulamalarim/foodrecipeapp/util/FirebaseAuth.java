@@ -18,9 +18,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.uygulamalarim.foodrecipeapp.Fragments.LoginPage;
 import com.uygulamalarim.foodrecipeapp.MainActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FirebaseAuth {
 
 
+    public void saveRecipe(String username,String recipe_name,String recipe_url){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+        reference.child(username).child("SavedRecipes").child(recipe_name).setValue(new SavedRecipe(recipe_name,recipe_url));
+    }
 
 
     public void saveToDb(View view, Context context, Activity activity, String username, String email, String password, String repeatpassword, EditText enterUsername, EditText enterEmail){
