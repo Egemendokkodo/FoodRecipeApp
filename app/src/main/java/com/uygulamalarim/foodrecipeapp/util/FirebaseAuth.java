@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uygulamalarim.foodrecipeapp.Fragments.LoginPage;
 import com.uygulamalarim.foodrecipeapp.MainActivity;
@@ -29,6 +30,32 @@ public class FirebaseAuth {
         DatabaseReference reference = database.getReference("users");
         reference.child(username).child("SavedRecipes").child(recipe_name).setValue(new SavedRecipe(recipe_name,recipe_url));
     }
+
+    public void deleteRecipe(String username, String recipe_name) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+
+
+        DatabaseReference savedRecipesRef = reference.child(username).child("SavedRecipes");
+
+        Query query = savedRecipesRef.orderByChild("recipe_name").equalTo(recipe_name);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
+                    recipeSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
 
     public void saveToDb(View view, Context context, Activity activity, String username, String email, String password, String repeatpassword, EditText enterUsername, EditText enterEmail){

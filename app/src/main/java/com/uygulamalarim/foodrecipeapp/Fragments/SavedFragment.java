@@ -1,5 +1,6 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SavedFragment extends Fragment {
+public class SavedFragment extends Fragment implements SavedAdapter.SavedOnclickRecycler {
 
     private RecyclerView recyclerviewSaved;
     private SavedAdapter savedAdapter;
+    List<FirebaseModel> recipeList = new ArrayList<>();
 
 
     @Override
@@ -60,8 +63,8 @@ public class SavedFragment extends Fragment {
         DatabaseReference savedRecipeRef=reference.child(username).child("SavedRecipes");
 
 
-        List<FirebaseModel> recipeList = new ArrayList<>();
-        savedAdapter = new SavedAdapter(recipeList);
+
+        savedAdapter = new SavedAdapter(recipeList,this);
         recyclerviewSaved = view.findViewById(R.id.savedRecycler);
         recyclerviewSaved.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         recyclerviewSaved.setAdapter(savedAdapter);
@@ -89,5 +92,14 @@ public class SavedFragment extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onClickSaved(int pos) {
+        String food_name=recipeList.get(pos).name.toString();
+        Log.d("onclicksaved",food_name);
+        Intent i=new Intent(getContext(),DetailedPage.class);
+        i.putExtra("FOOD_NAME",food_name);
+        startActivity(i);
     }
 }

@@ -26,9 +26,19 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:maxLength="25"
             android:text="Food Name"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/deleteSaved"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/white"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

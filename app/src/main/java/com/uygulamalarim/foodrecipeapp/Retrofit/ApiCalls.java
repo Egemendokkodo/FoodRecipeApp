@@ -33,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiCalls {
 
     private final String BASE_URL="https://api.spoonacular.com/";
-    private final String API="966347ce995847869022a2e31b4d08c0";
+    private final String API="903f4ef99a244f41abdc50e44fbf5683";
 
     private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
