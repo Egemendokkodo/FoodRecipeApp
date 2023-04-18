@@ -1,16 +1,22 @@
 package com.uygulamalarim.foodrecipeapp.Fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.uygulamalarim.foodrecipeapp.Adapter.InstructionsAdapter;
 import com.uygulamalarim.foodrecipeapp.Model.RecipeModel.RecipeModelMain;
@@ -32,10 +38,19 @@ public class DetailedPage extends AppCompatActivity {
     private InstructionsAdapter instructionsAdapter;
     private List<RecipeModelMain> instructionsList = new ArrayList<RecipeModelMain>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_page);
+
+
+
+
+
+
+
         Intent intent = getIntent();
         String food_name = intent.getStringExtra("FOOD_NAME");
         TextView foodname=findViewById(R.id.food_name);
@@ -52,7 +67,12 @@ public class DetailedPage extends AppCompatActivity {
         });
 
 
+
         new ApiCalls().makeDetailedPageApiCall(getApplicationContext(),food_name,randomRecipeList,instructionsList,foodname,sourcename,minutes,description,calories,foodpic,ischeap,isCheaptext,isglutenfree,isGlutenFreetext,isvegetarian,isVegetariantext,isvegan,isVegantext,savebtn);
+
+
+
+
 
 
 

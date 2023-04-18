@@ -1,4 +1,4 @@
-package com.uygulamalarim.foodrecipeapp.util;
+package com.uygulamalarim.foodrecipeapp.Model.SavedRecipeModel;
 
 public class SavedRecipe {
     String recipe_name,recipe_url;

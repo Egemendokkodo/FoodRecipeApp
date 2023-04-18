@@ -46,8 +46,12 @@ public class SavedFragment extends Fragment implements SavedAdapter.SavedOnclick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saved, container, false);
+        if(UserData.getInstance().getUsername().toString().equals("")){
+            return inflater.inflate(R.layout.fragment_saved_you_must_login, container, false);
+        }else{
+            return inflater.inflate(R.layout.fragment_saved, container, false);
+        }
+
     }
 
     @Override
@@ -56,37 +60,41 @@ public class SavedFragment extends Fragment implements SavedAdapter.SavedOnclick
 
 
 
-        String username = UserData.getInstance().getUsername().toString();
+        if (!UserData.getInstance().getUsername().toString().equals("")){
+            String username = UserData.getInstance().getUsername().toString();
 
-        FirebaseDatabase database= FirebaseDatabase.getInstance();
-        DatabaseReference reference =database.getReference("users");
-        DatabaseReference savedRecipeRef=reference.child(username).child("SavedRecipes");
+            FirebaseDatabase database= FirebaseDatabase.getInstance();
+            DatabaseReference reference =database.getReference("users");
+            DatabaseReference savedRecipeRef=reference.child(username).child("SavedRecipes");
 
 
 
-        savedAdapter = new SavedAdapter(recipeList,this);
-        recyclerviewSaved = view.findViewById(R.id.savedRecycler);
-        recyclerviewSaved.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        recyclerviewSaved.setAdapter(savedAdapter);
+            savedAdapter = new SavedAdapter(recipeList,this);
+            recyclerviewSaved = view.findViewById(R.id.savedRecycler);
+            recyclerviewSaved.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+            recyclerviewSaved.setAdapter(savedAdapter);
 
-        ValueEventListener recipeListener= new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot recipeSnapshot : snapshot.getChildren()) {
-                    String recipeName = recipeSnapshot.child("recipe_name").getValue(String.class);
-                    String recipePic = recipeSnapshot.child("recipe_url").getValue(String.class);
-                    FirebaseModel recipe = new FirebaseModel(recipeName,recipePic);
-                    recipeList.add(recipe);
+            ValueEventListener recipeListener= new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot recipeSnapshot : snapshot.getChildren()) {
+                        String recipeName = recipeSnapshot.child("recipe_name").getValue(String.class);
+                        String recipePic = recipeSnapshot.child("recipe_url").getValue(String.class);
+                        FirebaseModel recipe = new FirebaseModel(recipeName,recipePic);
+                        recipeList.add(recipe);
+                    }
+                    savedAdapter.notifyDataSetChanged();
                 }
-                savedAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        };
-        savedRecipeRef.addListenerForSingleValueEvent(recipeListener);
+                }
+            };
+            savedRecipeRef.addListenerForSingleValueEvent(recipeListener);
+        }
+
+
 
 
 

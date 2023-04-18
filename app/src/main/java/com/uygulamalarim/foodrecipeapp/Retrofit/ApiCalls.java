@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.uygulamalarim.foodrecipeapp.Fragments.DetailedPage;
 import com.uygulamalarim.foodrecipeapp.Model.RandomApiModel.RandomApiMain;
 import com.uygulamalarim.foodrecipeapp.Model.RecipeModel.RecipeModelMain;
 import com.uygulamalarim.foodrecipeapp.Model.SearchModel.SearchModelMain;
@@ -210,7 +211,6 @@ public class ApiCalls {
                 Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
     public void makeGridRecycler(Context context,List<SearchModelMain> gridList, RecyclerView.Adapter gridAdapter) {

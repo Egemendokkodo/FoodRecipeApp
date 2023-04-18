@@ -18,9 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.uygulamalarim.foodrecipeapp.Fragments.LoginPage;
 import com.uygulamalarim.foodrecipeapp.MainActivity;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.uygulamalarim.foodrecipeapp.Model.SavedRecipeModel.SavedRecipe;
 
 public class FirebaseAuth {
 

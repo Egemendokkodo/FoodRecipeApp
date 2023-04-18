@@ -98,7 +98,6 @@
                         android:id="@+id/food_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Lemon Shish Kebab"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
@@ -106,7 +105,6 @@
                         android:id="@+id/sourceName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="By Foodista.com"
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -131,7 +129,6 @@
                         android:layout_weight="1"
                         android:drawableStart="@drawable/stopwatch"
                         android:gravity="center"
-                        android:text="  54 Mins"
                         android:textColor="#808080"
                         android:textSize="15sp"
                         tools:layout_editor_absoluteX="72dp" />
@@ -145,7 +142,6 @@
 
                         android:drawableStart="@drawable/kcal"
                         android:gravity="center"
-                        android:text="  45 Kcal"
                         android:textColor="#808080"
                         android:textSize="14sp"
                         tools:layout_editor_absoluteX="100dp" />
@@ -304,7 +300,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
-                        android:text="LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLore"
                         android:textColor="#808080" />
 
                     <TextView
@@ -339,4 +334,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
